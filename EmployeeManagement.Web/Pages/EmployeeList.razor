@@ -1,0 +1,31 @@
+﻿@page "/"
+@inherits EmployeeListBase
+<h3>EmployeeList</h3>
+
+@if(Employees ==null)
+{
+  <div class="text-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+}else{
+    <div class="card-deck">
+    @foreach(var item in Employees)
+    {
+        <div class="card m-3">
+            <div class="card-header">
+                <h5>@item.FirstName @item.LastName</h5>
+                </div>
+
+                <img class="card-img-top" src="@item.Photo"/>
+
+                  <div class="card-footer text-center">
+                <a href="" class="btn btn-primary">View</a>
+                <a href="" class="btn btn-success">Edit</a>
+                <a href="" class="btn btn-danger">Danger</a>
+                </div>
+        </div>
+    }
+</div>
+}
