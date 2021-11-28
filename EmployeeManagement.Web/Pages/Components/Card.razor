@@ -1,0 +1,25 @@
+﻿@using EmployeeManagement.Components
+@inherits CardBase
+ <div class="card m-3">
+            <div class="card-header">
+                <h5> <input id="selectme+@Employee.FirstName" @onchange="CheckBoxChanged" type="checkbox" /> <label for="selectme+@Employee.FirstName">@Employee.FirstName @Employee.LastName</label> </h5>
+                </div>
+
+                <img class="card-img-top" src="@Employee.Photo"/>
+                  <div class="card-footer text-center">
+               @if(ShowFooter)
+        {
+           
+                  <div>
+                    <a href="@($"/employeedetails/{Employee.EmployeeId}")" class="btn btn-primary">View</a>
+                <a href="@($"/editemployee/{Employee.EmployeeId}")" class="btn btn-success">Edit</a>
+                <button class="btn btn-danger" @onclick="Delete_Click">Delete</button>
+                </div>
+            }
+        
+    </div>
+</div>
+
+<Confirm @ref="DeleteConfirmation" ConfirmationChanged="ConfirmDelete_Click"
+         ConfirmationMessage=@($"Are you sure you want to delete \"{Employee.FirstName}\"")>
+</Confirm>

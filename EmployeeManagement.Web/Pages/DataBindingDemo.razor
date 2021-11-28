@@ -1,0 +1,21 @@
+﻿@page "/demo"
+@using EmployeeManagement.Models
+@inherits DataBindingDemoBase
+<h3>Demo Data Binding</h3>
+
+
+<input class="form-control w-50" value="@Name" />
+<b>Name : </b> @Name @(Gender == "Male" ? $"Mr. {Name}" : $"Miss . {Name}")
+
+
+
+<input class="form-control w-50" @bind="@Name" @oninput="@(e=>{Name = e.Value.ToString();})" />
+<input class="form-control w-50" @bind="@Name" @bind:event="oninput"/>
+
+<input @bind="@Background" @bind:event="oninput" type="color" />
+<div style="width:200px;height:400px;background:@Background">
+</div>
+
+
+ <textarea @bind="@Description" @bind:event="oninput"/>
+ <b>TotalLength</b> @Description.Length

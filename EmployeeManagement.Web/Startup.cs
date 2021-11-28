@@ -1,8 +1,11 @@
+using EmployeeManagement.Web.Models;
+using EmployeeManagement.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace EmployeeManagement.Web
 {
@@ -12,7 +15,7 @@ namespace EmployeeManagement.Web
         {
             Configuration = configuration;
         }
-
+        private string url = "https://localhost:44351/";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -21,6 +24,9 @@ namespace EmployeeManagement.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddAutoMapper(typeof(EmployeeProfile));
+            services.AddHttpClient<IEmployeeService, EmployeeService>(client => { client.BaseAddress = new Uri(url); });
+            services.AddHttpClient<IDepartmentService, DepartmentService>(client => { client.BaseAddress = new Uri(url); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

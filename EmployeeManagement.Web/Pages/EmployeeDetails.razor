@@ -1,0 +1,26 @@
+﻿@page "/employeedetails/{id}"
+@page "/employeedetails"
+
+@inherits EmployeeDetailsBase
+<h3>EmployeeDetails</h3>
+@if(Employee == null || Employee.Department == null){
+    <div class="spinner"></div>
+}else{
+    
+  <div class="card m-3 w-50 m-auto">
+            <div class="card-header">
+                <h5>@Employee.FirstName @Employee.LastName @Coordinates</h5>
+                <h6>@Employee.Department.DepartmentName</h6>
+            </div>
+
+                <img class="card-img-top" src="@Employee.Photo" @onmousemove="@(e=> Coordinates = $"X = {e.ClientX} Y = {e.ClientY}")"/>
+  <div class="card-footer text-center">
+                      <button class="btn btn-primary" @onclick="@ShowHideBtn">@BtnText</button>
+                <div class="@CssText">
+                    <a href="@($"/employeedetails/{Employee.EmployeeId}")" class="btn btn-primary">View</a>
+                <a href="" class="btn btn-success">Edit</a>
+                <a href="" class="btn btn-danger">Danger</a>
+                </div>
+                </div>
+            </div>
+}
